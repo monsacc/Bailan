@@ -2,6 +2,9 @@ from typing import Union
 import uvicorn
 from fastapi import FastAPI
 
+import ttkbootstrap as ttk
+from ttkbootstrap.constants import *
+
 app = FastAPI()
 
 from PaymentMethod_class import PaymentMethod
@@ -10,8 +13,16 @@ from Account_class import Account , Reader
 from PaymentHistory import PaymentHistory
 from Coin_transection_class import Coin_transection
 from Book_class import Book
+from BaseModel import BaseModel
 
+root = ttk.Window()
+b1 = ttk.Button(root, text="Button 1", bootstyle=SUCCESS)
+b1.pack(side=LEFT, padx=5, pady=10)
 
+b2 = ttk.Button(root, text="Button 2", bootstyle=(INFO, OUTLINE))
+b2.pack(side=LEFT, padx=5, pady=10)
+
+root.mainloop()
 
 
 #if __name__ == "__main__":
@@ -41,15 +52,21 @@ controller.add_book(book3)
 controller.add_book(book4)
 controller.add_book(book5)
 
+controller.top_up("1",500,"bank")
+controller.buy_book([1],'1')
 
-controller.buy_book([1],'1',"Jan")
 print(T.book_collection_list)
 print(T.coin_transaction_history_list)
 print(T.coin)
+for info in T.coin_transaction_history_list:
+    print(info)
 
+
+
+
+""""
 @app.post("/buy_book", tags =["buy"])
-async def buy_book(list_book : dict , account_id : dict , date_time : dict)->dict:
-    T.book_collection_list.append(list_book)
+async def buy_book(list_book :  , account_id : dict , date_time : dict)->dict:
     return {
         "status" : controller.buy_book(list_book,account_id,date_time)
     }
@@ -63,7 +80,7 @@ async def top_up(account : str, money : int , chanel : str ,date : str)->dict:
     return {
         "status" : controller.top_up(account,money,chanel,date)
         }
-""""
+
 print(controller.top_up("1",500,"bank","Jan"))
 print(T.payment_history_list)
 print(T.coin_transaction_history_list)

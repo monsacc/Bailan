@@ -1,3 +1,5 @@
-r = requests.get("http://127.0.0.1:8000/todo")
-# print(r)
-# print(r.json())
+chanels = [
+    PaymentMethod("SCB"),
+    PaymentMethod("credit_card"),
+    PaymentMethod("K_plus")
+]

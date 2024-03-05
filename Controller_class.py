@@ -1,3 +1,4 @@
+import datetime
 class Controller:
     def __init__(self):
         self.__reader_list = []
@@ -69,13 +70,14 @@ class Controller:
         for chanels in self.__payment_method_list:
             return chanels 
     
-    def top_up(self, id_account, money, chanel, date_time):
+    def top_up(self, id_account, money, chanel):
         if self.search_reader(id_account) is not None:
             account = self.search_reader(id_account)
             for c in self.__payment_method_list:
                 if c.chanel_name == chanel:
                     if money % 2 == 0:
                         coin = money/2
+                        date_time = datetime.datetime.now()
                         account.adding_coin = coin
                         account.create_payment_history(money,date_time)
                         account.create_coin_transaction(coin,date_time,"top up")
@@ -84,7 +86,7 @@ class Controller:
                 return "Not Found Chanel"
         return "Don't Have any Account"
         
-    def buy_book(self, list_book_id, id_account, date_time): 
+    def buy_book(self, list_book_id, id_account): 
         if self.search_reader(id_account) is not None:
             account = self.search_reader(id_account)
             price = 0
@@ -95,6 +97,7 @@ class Controller:
                     account.update_book_collection_list(book)
                 else : return "No Book"
             if account.coin >= price:
+                date_time = datetime.datetime.now()
                 account.create_coin_transaction(price,date_time,"paid")
                 account.losing_coin = price 
                 book.num_of_reader = 1

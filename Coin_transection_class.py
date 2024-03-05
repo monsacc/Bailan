@@ -16,5 +16,8 @@ class Coin_transection:
     def  type(self):
         return self.__type
     
+    def __str__(self):
+        return f"You {self.type} {self.coin} coin on {self.date_time}"
+    
 
 

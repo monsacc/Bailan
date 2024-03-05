@@ -67,10 +67,10 @@ class Reader(Account):
     def losing_coin(self, losing_coin):
         self.__coin -= losing_coin
 
-    def create_payment_history(self,money,date_time):
+    def update_payment_history_list(self,money,date_time):
         self.__payment_history_list.append(PaymentHistory(money,date_time))        
 
-    def create_coin_transaction(self,coin,date_time,type):
+    def update_coin_transaction_history_list(self,coin,date_time,type):
         self.__coin_transaction_history_list.append(Coin_transection(coin,date_time,type))
     
     def update_book_collection_list(self, book):

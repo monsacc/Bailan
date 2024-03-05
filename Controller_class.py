@@ -74,13 +74,13 @@ class Controller:
         if self.search_reader(id_account) is not None:
             account = self.search_reader(id_account)
             for c in self.__payment_method_list:
-                if c.chanel_name == chanel:
+                if c.chanel_id == chanel:
                     if money % 2 == 0:
                         coin = money/2
                         date_time = datetime.datetime.now()
                         account.adding_coin = coin
-                        account.create_payment_history(money,date_time)
-                        account.create_coin_transaction(coin,date_time,"top up")
+                        account.update_payment_history_list(money,date_time)
+                        account.update_coin_transaction_history_list(coin,date_time,"top up")
                         return "Success"
                     else : return "Please increse/decrese money 1 Baht"
                 return "Not Found Chanel"
@@ -98,7 +98,7 @@ class Controller:
                 else : return "No Book"
             if account.coin >= price:
                 date_time = datetime.datetime.now()
-                account.create_coin_transaction(price,date_time,"paid")
+                account.update_coin_transaction_history_list(price,date_time,"paid")
                 account.losing_coin = price 
                 book.num_of_reader = 1
                 return "success" 

@@ -13,16 +13,16 @@ from Account_class import Account , Reader
 from PaymentHistory import PaymentHistory
 from Coin_transection_class import Coin_transection
 from Book_class import Book
-from BaseModel import BaseModel
+from BaseModel import BaseModel 
+from BaseModel import coinInput
 
 root = ttk.Window()
+root.geometry(f"{root.winfo_screenwidth()}x{root.winfo_screenheight()}")
 b1 = ttk.Button(root, text="Button 1", bootstyle=SUCCESS)
-b1.pack(side=LEFT, padx=5, pady=10)
+b1.pack(side=TOP, padx=5, pady=10)
 
-b2 = ttk.Button(root, text="Button 2", bootstyle=(INFO, OUTLINE))
-b2.pack(side=LEFT, padx=5, pady=10)
 
-root.mainloop()
+#root.mainloop()
 
 
 #if __name__ == "__main__":
@@ -34,7 +34,7 @@ chanels = [
     PaymentMethod("credit card",2)
     ]
 controller = Controller()
-T = Reader('get','1234','1')
+T = Reader('get','1234',1)
 #T.update_payment_history_list(PaymentHistory("500","Jan","add"))
 for c in chanels:
     controller.add_payment_method(c)
@@ -52,8 +52,8 @@ controller.add_book(book3)
 controller.add_book(book4)
 controller.add_book(book5)
 
-controller.top_up("1",500,"bank")
-controller.buy_book([1],'1')
+controller.top_up(1,500,1)
+controller.buy_book([1],1)
 
 print(T.book_collection_list)
 print(T.coin_transaction_history_list)
@@ -61,25 +61,12 @@ print(T.coin)
 for info in T.coin_transaction_history_list:
     print(info)
 
-
+@app.post("/top_up", tags=['top up'])
+async def top_up(account_id : int, money : coinInput, chanel_id:int):
+    return {controller.top_up(account_id, money.coin,chanel_id)}
 
 
 """"
-@app.post("/buy_book", tags =["buy"])
-async def buy_book(list_book :  , account_id : dict , date_time : dict)->dict:
-    return {
-        "status" : controller.buy_book(list_book,account_id,date_time)
-    }
-
-@app.get("/listbook", tags=["listbook"])
-async def get_collection()->dict:
-    return {'book':T.book_collection_list}
-
-@app.post("/top_up", tags=['top up'])
-async def top_up(account : str, money : int , chanel : str ,date : str)->dict:
-    return {
-        "status" : controller.top_up(account,money,chanel,date)
-        }
 
 print(controller.top_up("1",500,"bank","Jan"))
 print(T.payment_history_list)

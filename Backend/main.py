@@ -13,8 +13,8 @@ from Account_class import Account , Reader
 from PaymentHistory import PaymentHistory
 from Coin_transection_class import Coin_transection
 from Book_class import Book
-from BaseModel import BaseModel 
-from BaseModel import coinInput
+from BaseModel import BookIdList , coinInput
+
 
 root = ttk.Window()
 root.geometry(f"{root.winfo_screenwidth()}x{root.winfo_screenheight()}")
@@ -24,9 +24,8 @@ b1.pack(side=TOP, padx=5, pady=10)
 
 #root.mainloop()
 
-
-#if __name__ == "__main__":
-  #  uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
 
 
 chanels = [
@@ -53,17 +52,31 @@ controller.add_book(book4)
 controller.add_book(book5)
 
 controller.top_up(1,500,1)
-controller.buy_book([1],1)
-
+print(controller.buy_book(1,[1]))
+for i in controller.show_payment_method():
+    print(i)
 print(T.book_collection_list)
 print(T.coin_transaction_history_list)
 print(T.coin)
 for info in T.coin_transaction_history_list:
     print(info)
 
+for book in T.book_collection_list:
+    print(book.id)
+
 @app.post("/top_up", tags=['top up'])
 async def top_up(account_id : int, money : coinInput, chanel_id:int):
     return {controller.top_up(account_id, money.coin,chanel_id)}
+
+@app.post("/buy_book", tags=["buy"])
+async def buy_book(account_id: int, list_book : BookIdList):
+    return {
+        "Buy" : controller.buy_book(account_id,list_book.book_id)
+    }
+
+@app.get("/chanels",tags=["top up"])
+async def show_payment_method()->dict:
+    return {"chanels":controller.show_payment_method()}
 
 
 """"

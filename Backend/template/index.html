@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bailan</title>
+
+    <link rel="stylesheet" href="index.css">
+
+</head>
+<body>
+    <header>
+        <h1>Bailan</h1>
+            <!--ช่องค้นหา-->
+            <div class="search-container">
+                <input id="search_by_name" type="text" placeholder="Search...">
+                <button onclick="search_by_name()">Search</button>
+            </div>
+            <!--ตระกร้า -->
+            <div class="cart-container">
+                <a href="cart.html">Cart</a>
+            </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#หน้าแรก">หน้าแรก</a></li>
+            <li><a href="#ขายดี">ขายดี</a></li>
+            <li><a href="#มาใหม่">มาใหม่</a></li>
+            <li><a href="#โปรโมชัน">โปรโมชัน</a></li>
+            <li><a href="#แนะนำ">แนะนำ</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <section id="หน้าแรก">
+        <h2>หน้าแรก</h2>
+        <div id="content">
+
+        </div>
+    </section>
+
+    <section id="ขายดี">
+        <h2>ขายดี</h2>
+        <!-- Add your new books here -->
+    </section>
+
+    <section id="มาใหม่">
+        <h2>มาใหม่</h2>
+        <!-- Add your deals here -->
+    </section>
+
+    <section id="โปรโมชัน">
+        <h2>โปรโมชัน</h2>
+        <!-- Add information on how to sell e-books here -->
+    </section>
+
+    <section id="แนะนำ">
+        <h2>แนะนำ</h2>
+        <!-- Add information on how to sell e-books here -->
+    </section>
+
+    <footer id="contact">
+        <p>Contact Us:</p>
+        <!-- Add your contact information here -->
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+</body>
+</html>

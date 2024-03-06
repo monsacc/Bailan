@@ -1,0 +1,155 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    
+}
+
+h1 {
+    
+}
+
+h2 {
+    
+}
+
+a {
+    color: #9c27b0;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+} 
+
+/* Header Styles */
+header {
+    background-color: #ba68c8;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    flex-wrap: wrap; 
+}
+
+header h1 {
+    color: #fff;
+    margin: 0;
+}
+
+.cart-container {
+    margin-right: 10px;
+}
+
+.cart-container button {
+    background-color: #ba68c8;
+    color: #fff;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cart-container button:hover {
+    background-color: #9c27b0;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-container input[type="text"] {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.search-container button {
+    background-color: #ba68c8;
+    color: #fff;
+    padding: 6px 10px;
+    border: none;
+    border-left: 1px solid #ccc;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #9c27b0;
+}
+
+.search-container {
+    float: right;
+}
+
+.search-container input[type="text"] {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.search-container button {
+    background-color: #ba68c8;
+    color: #fff;
+    padding: 6px 10px;
+    border: none;
+    border-left: 1px solid #ccc;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #ba68c8;
+}
+
+/* Navigation Styles */
+nav {
+    background-color: #eee;
+    padding: 10px 0;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+nav ul li {
+    margin: 5px;
+}
+
+/* Section Styles */
+section {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+} 
+
+section h2 {
+    color: #000000;
+} 
+
+/* Footer Styles */
+footer {
+    background-color: #eee;
+    padding: 10px;
+    text-align: center;
+} 

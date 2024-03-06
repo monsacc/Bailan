@@ -67,8 +67,11 @@ class Controller:
         return None
     
     def show_payment_method(self):
-        for chanels in self.__payment_method_list:
-            return chanels 
+        chanels = []
+        for c in self.__payment_method_list:
+             chanels.append({c.chanel_id : c.chanel_name})
+        return chanels
+   
     
     def top_up(self, id_account, money, chanel):
         if self.search_reader(id_account) is not None:
@@ -86,13 +89,13 @@ class Controller:
                 return "Not Found Chanel"
         return "Don't Have any Account"
         
-    def buy_book(self, list_book_id, id_account): 
-        if self.search_reader(id_account) is not None:
-            account = self.search_reader(id_account)
+    def buy_book(self, id_account ,list_book_id): 
+        account = self.search_reader(id_account)
+        if account is not None:
             price = 0
             for id in list_book_id:
-                if self.search_book(id) is not None:
-                    book = self.search_book(id)
+                book = self.search_book(id)
+                if book is not None:
                     price += book.price_coin
                     account.update_book_collection_list(book)
                 else : return "No Book"

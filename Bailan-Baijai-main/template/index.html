@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Bailan</title>
+
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Bailan</h1>
+        </div>
+        <!--ช่องค้นหา-->
+        <div class="search-container">
+            <input id="search_by_name" type="text" placeholder="Search...">
+            <button onclick="search_by_name()">Search</button>
+        </div>
+        <!--ตระกร้า -->
+            <div class="cart-container">
+                <a href="cart.html">
+                    <div class="cart-frame">
+                        Cart
+                    </div>   
+                </a>
+            </div>
+            <!--เติมเงิน-->
+            <div class="top_up-content">
+                <a href="top_up.html">
+                    <div class="top_up-frame">
+                        Top up
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#หน้าแรก">หน้าแรก</a></li>
+            <li><a href="#ขายดี">ขายดี</a></li>
+            <li><a href="#มาใหม่">มาใหม่</a></li>
+            <li><a href="#โปรโมชัน">โปรโมชัน</a></li>
+            <li><a href="#แนะนำ">แนะนำ</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <section id="หน้าแรก">
+
+        <div id="content">
+            <!-- show book from search -->
+        </div>
+
+        <h2>หน้าแรก</h2>
+        <div class="main-content">
+            <div class="books">
+                <div class="book">
+                    <a href="book_info.html?id=1" target="_blank">
+                        <img src="image/great book.jpg" alt="Great Book">
+                        <h3>Great Book</h3>
+                    </a>
+                    <p>wrpak</p>
+                    <p>100 coin</p>
+                </div>
+                <div class="book">
+                    <a href="book_info.html?id=2" target="_blank">
+                        <img src="image/thai book.jpg">
+                        <h3>Thai Book</h3>
+                    </a>
+                    <p>warinww</p>
+                    <p>200 coin</p>
+                </div>
+                <div class="book">
+                    <a href="book_info.html?id=3" target="_blank">
+                        <img src="image/japan book.jpg">
+                        <h3>Japan Book</h3>
+                    </a>
+                    <p>valrinlu</p>
+                    <p>300 coin</p>
+                </div>
+                <div class="book">
+                    <a href="book_info.html?id=4" target="_blank">
+                        <img src="image/code book.jpg">
+                        <h3>Code Book</h3>
+                    </a>
+                    <p>monsac</p>
+                    <p>400 coin</p>
+                </div>
+                <div class="book">
+                    <a href="book_info.html?id=5" target="_blank">
+                        <img src="image/food book.jpg">
+                        <h3>Food Book</h3>
+                    </a>
+                    <p>wrpak</p>
+                    <p>500 coin</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ขายดี">
+        <h2>ขายดี</h2>
+        <div class="main-content">
+            <div class="books">
+                <div class="book">
+                    <a href="book_info.html?id=1" target="_blank">
+                        <img src="image/great book.jpg" alt="Great Book">
+                        <h3>Great Book</h3>
+                    </a>
+                    <p>wrpak</p>
+                    <p>100 coin</p>
+                </div>
+                <div class="book">
+                    <a href="book_info.html?id=3" target="_blank">
+                        <img src="image/japan book.jpg">
+                        <h3>Japan Book</h3>
+                    </a>
+                    <p>valrinlu</p>
+                    <p>300 coin</p>
+                </div>
+                <div class="book">
+                    <a href="book_info.html?id=5" target="_blank">
+                        <img src="image/food book.jpg">
+                        <h3>Food Book</h3>
+                    </a>
+                    <p>wrpak</p>
+                    <p>500 coin</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="มาใหม่">
+        <h2>มาใหม่</h2>
+        <div class="main-content">
+            <div class="books">
+                <div class="book">
+                    <a href="book_info.html?id=2" target="_blank">
+                        <img src="image/thai book.jpg">
+                        <h3>Thai Book</h3>
+                    </a>
+                    <p>warinww</p>
+                    <p>200 coin</p>
+                </div>
+                <div class="book">
+                    <a href="book_info.html?id=4" target="_blank">
+                        <img src="image/code book.jpg">
+                        <h3>Code Book</h3>
+                    </a>
+                    <p>monsac</p>
+                    <p>400 coin</p>
+                </div>
+                <div class="book">
+                    <a href="book_info.html?id=6" target="_blank">
+                        <img src="image/animal book.jpg">
+                        <h3>Animal Book</h3>
+                    </a>
+                    <p>warinww</p>
+                    <p>600 coin</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="โปรโมชัน">
+        <h2>โปรโมชัน</h2>
+        <!-- Add information on how to sell e-books here -->
+    </section>
+
+    <section id="แนะนำ">
+        <h2>แนะนำ</h2>
+        <!-- Add information on how to sell e-books here -->
+    </section>
+
+    <footer id="contact">
+        <p>Contact Us:</p>
+        <!-- Add your contact information here -->
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+
+h1{
+    text-align: center;
+}
+
+p{
+    text-align: center;
+}
+
+
+.money-container input[type="text"] {
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    position: relative;
+}
+
+.id-container input[type="text"]{
+    padding: 5px 8px ;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    position: relative;
+
+}
+
+.chanel-container input[type="text"]{
+    padding: 5px 8px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    position: relative;
+}
+
+
+.top_up-content button{
+    position: relative;
+    left: 720px;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.top_up-content button:hover {
+    background-color: #ba68c8;
+}

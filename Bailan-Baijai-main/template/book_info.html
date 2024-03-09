@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+    <title>Bailan</title>
+
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Bailan</h1>
+        </div>
+        <!--ช่องค้นหา-->
+        <div class="search-container">
+            <input id="search_by_name" type="text" placeholder="Search...">
+            <button onclick="search_by_name()">Search</button>
+        </div>
+        <!--ตระกร้า -->
+            <div class="cart-container">
+                <a href="cart.html">
+                    <div class="cart-frame">
+                        Cart
+                    </div>   
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#หน้าแรก">หน้าแรก</a></li>
+            <li><a href="#ขายดี">ขายดี</a></li>
+            <li><a href="#มาใหม่">มาใหม่</a></li>
+            <li><a href="#โปรโมชัน">โปรโมชัน</a></li>
+            <li><a href="#แนะนำ">แนะนำ</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="bookInfoContainer">
+        <img id="bookCover" src="" alt="Book Cover">
+        <div id="bookInfo" class="bookInfoDetails">
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const queryParams = new URLSearchParams(window.location.search);
+            const bookId = queryParams.get('id');
+            get_book_info(bookId);   
+        };
+    </script>
+
+    
+
+</body>
+</html>

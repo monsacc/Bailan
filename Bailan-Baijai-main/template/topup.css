@@ -1,0 +1,25 @@
+.payment-container{
+    background-color: #767676;
+    width: 280px;
+    color: #fff;
+    position: relative;
+    left: 600px;
+    border-radius: 10px;
+}
+p{
+    
+
+}
+
+.payment-container input{
+    border-radius: 5px;
+    
+}
+
+.payment-container button{
+    margin-left: 110px;
+}
+
+.chanels-content{
+    margin-left: 600px;
+}

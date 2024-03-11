@@ -1,237 +1,68 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1;
-    color: #333;
-    margin: 0;
-    padding: 0;
+.bg-header {
+    background-color: rgb(0, 0, 0);
 }
 
-h1, h2 {
+.h1-center {
+    color: white;
     text-align: center;
+    flex-grow: 1;
 }
 
-h1 {
-    
-}
-
-h2 {
-    
-}
-
-a {
-    color: #333;
-    text-decoration: none;
-}
-
-a:hover {
-    color:#5B1796;
-}
-
-b {
-    color: #333;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-b:hover {
-    color:#ba68c8
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-} 
-
-/* Header Styles */
-header {
-    background-color: #ba68c8;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    /* text-align: center; */
-    /* align-items: center;  */
-    /* flex-wrap: wrap;  */
-}
-
-header h1 {
-    flex: 1;
+.promotion-btn {
+    background-color: #ff6347;
     color: #fff;
-    margin: 0px;
-    text-align: center;
 }
 
-้.header-title {
-    text-align: center;
-    margin: 0;
+.checked {
+    color: orange;
+  }
+
+.btn-outline-light {
+    background-color: #e9e9e9;
+    color: black;
 }
-
-.top_up-frame,
-.cart-frame {
-    background-color: #ba68c8;
-    color: #fff;
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.cart-container {
-    order: -1;
-}
-
-.top_up-content{
-    order: -1;
-    position: relative;
-    left: -300px;
-}
-
-.search-container {
-    order: 1;
-}
-
-.cart-container button,
-.search-container button {
-    background-color: #ba68c8;
-    color: #fff;
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.cart-container button:hover,
-.search-container button:hover {
-    background-color: #9c27b0;
-}
-
-.search-container {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.search-container input[type="text"] {
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-}
-
-.search-container button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.search-container button:hover {
-    background-color: #ba68c8;
-}
-
-.main-content {
-    background-color: #EDD9FF;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px rgba(0,0,0,2);
-}
-
-.books {
-    display: grid;
-    grid-template-columns: repeat(5,1fr);
-    grid-gap: 40px;
-    margin-top: 40px;
-}
-
-.book {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.book button {
-    border: none;
-    background-color: #EDD9FF;
-}
-
-.book img {
-    max-width: 200px;
-    margin-bottom: 0px;
-    box-shadow: 0px 0px 5px rgba(0,0,0,2);
-}
-
-.book h3 {
-    font-size: 24px;
-    margin-top: 20px;
-}
-
-.book p {
-    margin-top: -5px;
-    color :#360C5A;
-    line-height: 15px;
-}
-
-/* Navigation Styles */
-nav {
-    background-color: #eee;
-    padding: 10px 0;
-}
-
-nav ul {
-    display: flex;
-    justify-content: space-around;
-}
-
-nav ul li {
-    margin: 5px;
-}
-
-/* Section Styles */
-section {
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-} 
-
-section h2 {
-    color: #000000;
-} 
-
-/* Footer Styles */
-footer {
-    background-color: #eee;
-    padding: 10px;
-    text-align: center;
-} 
 
 
 .bookInfoContainer {
     display: flex;
+    flex-direction: row;
+    /* เปลี่ยนเป็นแนวตั้ง */
     align-items: center;
+    /* จัดให้เนื้อหาอยู่ตรงกลางตามแนวนอน */
+    justify-content: center;
+    /* จัดให้เนื้อหาอยู่ตรงกลางตามแนวตั้ง */
+    padding: 20px;
+    height: 100vh;
+    /* ทำให้เนื้อหาอยู่ตรงกลางของหน้าจอทั้งความสูง */
+    margin-top: -100px;
+}
+
+.bookInfoDetails {
+    margin-top: -100px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 #bookCover {
-    width: 300px;
-    height: auto;
-    border-radius: 10px; 
-    box-shadow: 0px 0px 5px rgba(0,0,0,2);
-    margin-top: 100px;
-    margin-left: 420px;
+    width: 320px;
+    /* กำหนดขนาดสูงสุดของรูปภาพ */
 }
 
-#bookInfo h1{
-    margin-top: 0px;
-    margin-left: 50px;
-    margin-bottom: 40px;
+.btn {
+    margin-left: 2px;
 }
 
-#bookInfo p{
-    margin-left: 50px;
-    margin-bottom: 10px;
-    flex: 1;
+.star {
+    margin-top: -250px;
+    margin-left: 740px;
 }
+
+.comment {
+    margin-left: 740px;
+} 
+
+a {
+    color: black;
+    text-decoration: none;
+  }  
+  

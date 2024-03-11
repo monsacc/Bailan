@@ -1,6 +1,10 @@
 from typing import List
 from pydantic import BaseModel
 
+class User(BaseModel):
+    account_name: str
+    password: str
+
 class coinInput(BaseModel):
     coin: int
     
@@ -9,7 +13,7 @@ class BookIdList(BaseModel):
     
 class Uploadbook(BaseModel):
     name: str
-    writer: str 
+    # writer: str 
     book_type: str
     price_coin: int
     intro: str

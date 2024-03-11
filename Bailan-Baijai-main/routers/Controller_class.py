@@ -2,6 +2,7 @@ import datetime
 from routers.BookStatus_class import BookStatus
 from routers.Complain_class import Complain
 from routers.Review_class import Review
+from routers.Account_class import Reader, Writer
 
 class Controller:
     def __init__(self):
@@ -49,14 +50,7 @@ class Controller:
         writer.id_account = self.__num_of_account
         self.__writer_list.append(writer)
         
-    def login(self, username, password):
-        for account in self.__reader_list:
-            if account.username == username and account.password == password:
-                return account
-        for account in self.writer_list:
-            if account.username == username and account.password == password:
-                return account
-        return None
+    
 
     def add_complain(self, complain):
         self.__complain_list.append(complain)
@@ -78,6 +72,23 @@ class Controller:
                 self.__promotion_list.remove(prom)
 
 # Book
+    def get_all_book(self):
+        list = []
+        for book in self.__book_list:
+            format = {
+                "id": book.id,
+                "book_name" : book.name,
+                "writer_name" : book.writer.account_name,
+                "type_book" : book.book_type,
+                "rating" : book.review.rating,
+                "price" : book.price_coin
+            }
+            list.append(format)
+        if list:
+            return list
+        else:
+            return None
+
     def search_reader_by_id(self, reader_id):
         for reader in self.__reader_list:
             if reader.id_account == reader_id:
@@ -101,9 +112,12 @@ class Controller:
         for book in self.__book_list:
             if book.name == bookname or bookname in book.name:
                 format = {
+                    "id": book.id,
                     "book_name" : book.name,
-                    "writer_name " : book.writer.account_name,
-                    "type_book" : book.book_type
+                    "writer_name" : book.writer.account_name,
+                    "type_book" : book.book_type,
+                    "rating" : book.review.rating,
+                    "price" : book.price_coin
                 }
                 new_book_list.append(format)
         if new_book_list:
@@ -160,10 +174,13 @@ class Controller:
             if promotion.name_festival == promotion_name:
                 for book in promotion.book_list:
                     format = {
-                    "book_name" : book.name,
-                    "writer_name " : book.writer.account_name,
-                    "price_book" : book.price_coin
-                }
+                        "id": book.id,
+                        "book_name" : book.name,
+                        "writer_name" : book.writer.account_name,
+                        "type_book" : book.book_type,
+                        "rating" : book.review.rating,
+                        "price" : book.price_coin
+                    }
                     books.append(format)
                 if books == []:
                     return "No book in this promotion"
@@ -173,24 +190,49 @@ class Controller:
     def show_book_info(self, book_id):
         book = self.search_book_by_id(book_id)
         if book is not None:
-            # format = [f'name : {book.name}', f'writer : {book.writer.account_name}', f'type : {book.book_type}', f'intro : {book.intro}', f'promotion : {book.promotion.show_info()}', f'rating: {book.review.rating}', f'{book.review.show_comment()}']
-            return book
+            format = {
+                    "book_name" : book.name,
+                    "writer_name" : book.writer.account_name,
+                    "type_book" : book.book_type,
+                    "intro" : book.intro,
+                    "rating" : book.review.rating,
+                    "price" : book.price_coin
+                }
+            return format
         return 'Not Found'
             
-    def book_of_writer(self,writer): #คลังหนังสือที่ตัวเองแต่ง ID 
-        new_book_list = []
-        for book in writer.book_collection_list:
-            format = [f'Book Name: {book.name}' , f'Writer Name: {book.writer.account_name}' , f'Type of Book: {book.book_type}' , f'Price Coin: {book.price_coin}' , f'Intro: {book.intro}' , f'Content: {book.content}']
-            new_book_list.append(format)
-
-        return new_book_list
+    def show_book_collection_of_writer(self,writer_name):
+        book_collection = []
+        for account in self.__writer_list:
+            if account.account_name == writer_name:
+                for book in account.book_collection_list:
+                    format = {
+                        "id": book.id,
+                        "book_name" : book.name,
+                        "writer_name" : book.writer.account_name,
+                        "type_book" : book.book_type,
+                        "intro" : book.intro,
+                        "rating" : book.review.rating,
+                        "price" : book.price_coin
+                    }
+                    book_collection.append(format)
+                return book_collection
+        return "Not found account"
     
     def show_book_collection_of_reader(self, reader_id):
         book_collection = []
         account = self.search_reader_by_id(reader_id)
         if account is not None:
-            for list in account.book_collection_list:
-                format = [f'Book Name: {list.name}' , f'Writer Name: {list.writer.account_name}' , f'Type of Book: {list.book_type}' , f'Price Coin: {list.price_coin}' , f'Intro: {list.intro}' , f'Content: {list.content}']        
+            for book in account.book_collection_list:
+                format = {
+                    "id": book.id,
+                    "book_name" : book.name,
+                    "writer_name" : book.writer.account_name,
+                    "type_book" : book.book_type,
+                    "intro" : book.intro,
+                    "rating" : book.review.rating,
+                    "price" : book.price_coin
+                }
                 book_collection.append(format)
         if book_collection:
             return book_collection
@@ -252,7 +294,7 @@ class Controller:
         else:
             return {"error": "The reader does not exist."}
 
-# Hostory
+# History
     def cointrasaction_history(self,account_id):
         coin_tran_list = []
         account = self.search_reader_by_id(account_id)
@@ -263,9 +305,11 @@ class Controller:
         
         for info in account.coin_transaction_history_list:
             if info.type == "Buy" or info.type == "Rent":
-                coin_tran_list.append(f"You {info.type} books by using {info.coin} coin on {info.date_time}")
+                coin_tran_list.append(f"You {info.type} books by using {info.coin} coin on {info.date_time}.")
+            elif info.type == "top up":
+                coin_tran_list.append(f"You {info.type} {info.coin} coin.")
             elif info.type == "Transfer":
-                coin_tran_list.append(f"You {info.type} {info.coin} coin on {info.date_time}")
+                coin_tran_list.append(f"You {info.type} {info.coin} coin on {info.date_time}.")
 
         if coin_tran_list:
             return coin_tran_list
@@ -286,8 +330,6 @@ class Controller:
             return payment_list
         else:
             return "Not History"
-
-
 
 # Money
     def show_payment_method(self):
@@ -315,7 +357,6 @@ class Controller:
                     else : return "Please increse/decrese money 1 Baht"
                 return "Not Found Chanel"
         return "Don't Have any Account"
-
     def transfer(self, writer_id, coin):
         account = self.search_writer_by_id(writer_id)
         if account is not None:
@@ -386,7 +427,7 @@ class Controller:
                 return "Please rate this book in 0-5"
             else:
                 book.review.add_rating(rating)
-                return "Success"
+                return book.review.rating
         return "Not found book"
     
     def submit_comment(self, reader_id, book_id, message):
@@ -404,35 +445,70 @@ class Controller:
         book = self.search_book_by_id(book_id)
 
         if book is not None:
-            comments = book.review.show_comment() 
-            comment_list.append(comments)
+            for account, comment, date_time in book.review.comment_list:
+                format = {
+                    "account" : account.account_name,
+                    "comment" : comment,
+                    "datetime" : date_time
+                }
+                comment_list.append(format)
             return comment_list
-        
-        return "Not have comment"
+        return "Not found book"
 
 # Promotion
     def show_promotion(self):
-        promotions = []
         for promotion in self.__promotion_list:
-            promotions.append(f'promotion: {promotion.name_festival}')
-        if promotions == []:
-            return "No book in this pormotion"
-        return promotions
+            return promotion.name_festival
+        return "don't have pormotion now"
 
 # Complain
     def submit_complaint(self, user_id, message):
         complain = Complain(user_id, message)
-        self.__complain_list.append(complain)
+        
+        user = self.search_reader_by_id(user_id)
+        if user is None:
+            user = self.search_writer_by_id(user_id)
+            if user is None:
+                return "Not found account"
+            
         date_time = datetime.datetime.now()
         complain.date_time = date_time
+        self.__complain_list.append((user.account_name, message, complain.date_time))
         return "Success"
 
     def view_complaints(self):
         if not self.complain_list:
             return "No complaints available."
-        complaints_info = {}
-        for complain in self.complain_list:
-            if complain.user_id not in complaints_info:
-                complaints_info[complain.user_id] = []
-            complaints_info[complain.user_id].append({"message": complain.message, "datetime": complain.date_time})
+        complaints_info = []
+        for account, message, datetime in self.__complain_list:
+            format = {
+                "account": account,
+                "message": message,
+                "datetime": datetime
+            }
+            complaints_info.append(format)
+        if complaints_info == []:
+            return "Have no complain."
         return complaints_info
+
+    def login_reader(self, account_name, password):
+        for account in self.__reader_list:
+            if account.account_name == account_name and account.password == password:
+                return account
+        for account in self.writer_list:
+            if account.account_name == account_name and account.password == password:
+                return account
+        return None
+
+    def register_reader(self, account_name, password):
+        for reader in self.__reader_list:
+            if reader.account_name == account_name:
+                return "Username already exists. Please choose another one."
+
+        self.__num_of_account += 1
+        reader = Reader(account_name, password)
+        reader.id_account = self.__num_of_account
+        self.__reader_list.append(reader)
+        
+        return "Reader registered successfully."
+        

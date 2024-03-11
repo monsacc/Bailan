@@ -11,6 +11,7 @@ class Reader(Account):
     def __init__(self, account_name, password):
         super().__init__(account_name, password)
         self.__account_name =account_name
+        self.__password = password
         self.__id_account = 0
         self.__coin = 0
         self.__cart = Cart()
@@ -26,6 +27,10 @@ class Reader(Account):
     @property
     def id_account(self):
         return self.__id_account
+    
+    @property
+    def password(self):
+        return self.__password
 
     @property
     def book_collection_list(self):
@@ -83,6 +88,7 @@ class Writer(Account):
     def __init__(self, account_name, password):
         super().__init__(account_name, password)
         self.__account_name = account_name
+        self.__password = password
         self.__id_account = 0
         self.__coin = 0
         self.__money = 0
@@ -96,6 +102,10 @@ class Writer(Account):
     @property
     def id_account(self):
         return self.__id_account
+    
+    @property
+    def password(self):
+        return self.__password
 
     @property
     def coin(self):

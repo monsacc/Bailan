@@ -14,21 +14,27 @@ async function search_by_name() {
   displayBookList(book_list);
 }
 
-async function search_by_name() {
-  const input = document.getElementById("search_by_name").value;
-  const content = document.getElementById("content");
-  console.log(input);
-
-  const response = await axios.get(
-    `http://127.0.0.1:8000/search_book_by_name?name=${input}`
-  );
-
+async function get_chanels() {
+  const response = await axios.get(`http://127.0.0.1:8000/chanels`);
   console.log(response.data);
-
-  const book_list = response.data.book_list;
-
-  displayBookList(book_list);
+  const chanel = response.data['chanels'];
+  displayChanels(chanel);
+  console.log(chanel)
+  
 }
+
+function displayChanels(channels) {
+  const payment_chanel = document.getElementById('chanels');
+  payment_chanel.innerHTML = ``;
+
+  channels.forEach(chanel => {
+    const div = document.createElement('div');
+    div.innerHTML = `<p>${chanel.id} ${chanel.name}</p>`;
+    payment_chanel.appendChild(div);
+  });
+}
+
+
 
 async function get_book_info(id) {
   const response = await axios.get(

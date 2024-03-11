@@ -293,7 +293,11 @@ class Controller:
     def show_payment_method(self):
         chanels = []
         for c in self.__payment_method_list:
-             chanels.append({c.chanel_id : c.chanel_name})
+             format = {
+                 "id":c.chanel_id,
+                "name":c.chanel_name
+             }
+             chanels.append(format)
         return chanels
 
     def top_up(self, id_account, money, chanel):

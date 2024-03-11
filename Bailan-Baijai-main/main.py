@@ -197,7 +197,7 @@ async def show_payment_method()->dict:
 
 @app.post("/top_up", tags=['Money'])
 async def top_up(account_id : int, money : coinInput, chanel_id:int):
-    return {controller.top_up(account_id, money.coin,chanel_id)}
+    return {"status" : controller.top_up(account_id, money.coin,chanel_id)}
 
 @app.post("/transfer", tags=['Money'])
 async def transfer_coin_to_money(writer_id:int, data: coinInput):

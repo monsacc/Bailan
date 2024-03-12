@@ -297,7 +297,9 @@ async function show_complain() {
 
   const complainList = response.data["Complain"];
   displayComplain(complainList);
+  
 }
+
 
 function displayComplain(complainList) {
   const complainContainer = document.getElementById('complainList');

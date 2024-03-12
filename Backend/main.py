@@ -16,16 +16,16 @@ from Book_class import Book
 from BaseModel import BookIdList , coinInput
 
 
-root = ttk.Window()
-root.geometry(f"{root.winfo_screenwidth()}x{root.winfo_screenheight()}")
-b1 = ttk.Button(root, text="Button 1", bootstyle=SUCCESS)
-b1.pack(side=TOP, padx=5, pady=10)
+# root = ttk.Window()
+# root.geometry(f"{root.winfo_screenwidth()}x{root.winfo_screenheight()}")
+# b1 = ttk.Button(root, text="Button 1", bootstyle=SUCCESS)
+# b1.pack(side=TOP, padx=5, pady=10)
 
 
 #root.mainloop()
 
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
+#if __name__ == "__main__":
+#    uvicorn.run("main:app", host="127.0.0.1", port=8000, log_level="info")
 
 
 chanels = [
@@ -51,7 +51,9 @@ controller.add_book(book3)
 controller.add_book(book4)
 controller.add_book(book5)
 
-controller.top_up(1,500,1)
+controller.top_up(1,150,3)
+
+print(T.payment_history_list)
 print(controller.buy_book(1,[1]))
 for i in controller.show_payment_method():
     print(i)

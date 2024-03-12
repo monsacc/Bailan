@@ -74,14 +74,31 @@
             console.log(localStorage.getItem('username'));
             get_all_book();
         
-            // Check if the user is a writer
+            // // Check if the user is a writer
+            // if (accountType === 'writer') {
+            //     // Change the text of the "Top Up" button to "Transfer"
+            //     const topUpButton = document.querySelector('a[href="topup.html"]');
+            //     if (topUpButton) {
+            //         topUpButton.innerText = 'Transfer';
+            //         // Change the href attribute to "transfer.html" or any appropriate URL
+            //         topUpButton.setAttribute('href', 'transfer.html');
+            //     }
+            // }
             if (accountType === 'writer') {
                 // Change the text of the "Top Up" button to "Transfer"
                 const topUpButton = document.querySelector('a[href="topup.html"]');
                 if (topUpButton) {
-                    topUpButton.innerText = 'Transfer';
-                    // Change the href attribute to "transfer.html" or any appropriate URL
-                    topUpButton.setAttribute('href', 'transfer.html');
+                topUpButton.innerText = 'Transfer';
+                // Change the href attribute to "transfer.html" or any appropriate URL
+                topUpButton.setAttribute('href', 'transfer.html');
+
+                // Add an "Upload" button next to the "Transfer" button
+                const uploadButton = document.createElement('a');
+                uploadButton.className = 'btn btn-outline-light me-2'; // Set the appropriate class names
+                uploadButton.setAttribute('type', 'button'); // Set the appropriate type attribute
+                uploadButton.innerText = 'Upload Book';
+                uploadButton.setAttribute('href', 'upload_book.html'); // Set the appropriate URL for the upload page
+                topUpButton.parentNode.insertBefore(uploadButton, topUpButton.nextSibling);
                 }
             }
         
@@ -111,6 +128,7 @@
 
     <script src="js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="index.js"></script>
 </body>
 

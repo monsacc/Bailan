@@ -61,6 +61,7 @@ class Controller:
         book.writer = writer
         self.__book_list.append(book)
         writer.book_collection_list.append(book)
+        return "Success"
 
     def add_payment_method(self, payment_method):
         self.__payment_method_list.append(payment_method)
@@ -118,7 +119,7 @@ class Controller:
     def search_book_by_bookname(self, bookname):
         new_book_list = []
         for book in self.__book_list:
-            if book.name == bookname or bookname in book.name:
+            if book.name.lower() == bookname.lower() or bookname.lower() in book.name.lower():
                 format = {
                     "id": book.id,
                     "book_name" : book.name,

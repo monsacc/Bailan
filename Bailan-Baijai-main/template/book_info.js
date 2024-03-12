@@ -1,123 +1,34 @@
-const account_id = localStorage.getItem('account_id');
-
-document.getElementById('addToCartButton').addEventListener('click', function () {
+async function addToCart() {
     const queryParams = new URLSearchParams(window.location.search);
-    const book_id = queryParams.get('id');
-    const account_id = getLoggedInAccountId(); 
+    const bookId = queryParams.get('id');
+    const accountId = localStorage.getItem('account_id');
+    try {
+        const response = await axios.post(`http://127.0.0.1:8000/add_cart?reader_id=${accountId}&book_id=${bookId}`);
+        console.log(response.data.book)
+        result = response.data.book
+        console.log(result)
+        if (result === "Success") {
+            Swal.fire({
+                icon: "success",
+                title: "Book added to cart",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        } else if (result === "Book is already in the cart"){
+            Swal.fire({
+                icon: "error",
+                title: "Book is already in the cart",
+                showConfirmButton: false,
+                timer: 1500
+            });
+        } 
 
-    if (book_id && account_id) {
-        addToCart(account_id, book_id);
-    } else {
-        console.error('Book ID or Account ID is missing.');
+    } catch (error) {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: '<a href="#" style="text-align: center;">Why do I have this issue?</a>'
+        });        
     }
-});
-
-function addToCart(account_id, book_id) {
-    fetch(`/add_cart?account_id=${account_id}&book_id=${book_id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Network response was not ok.');
-        })
-        .then(data => {
-            console.log(data);
-            alert('Book added to cart successfully!');
-        })
-        .catch(error => {
-            console.error('There was a problem with your fetch operation:', error);
-            alert('Error adding book to cart. Please try again later.');
-        });
-}
-
-// แสดงรายการสินค้าในตะกร้า
-function showCart(readerId) {
-    fetch(`/show_cart?reader_id=${readerId}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Network response was not ok.');
-        })
-        .then(data => {
-            // แสดงรายการสินค้าที่มีอยู่ในตะกร้า
-            console.log(data);
-            // ทำการแสดงผลในหน้าเว็บ
-            // เช่น การสร้าง HTML เพื่อแสดงรายการสินค้าในตะกร้า
-        })
-        .catch(error => {
-            console.error('There was a problem with your fetch operation:', error);
-            alert('Error fetching cart data. Please try again later.');
-        });
-}
-
-document.getElementById('addToCartButton').addEventListener('click', function () {
-    const queryParams = new URLSearchParams(window.location.search);
-    const book_id = queryParams.get('id');
-    const account_id = getLoggedInAccountId(); 
-
-    if (book_id && account_id) {
-        addToCart(account_id, book_id);
-    } else {
-        console.error('Book ID or Account ID is missing.');
-    }
-});
-
-function addToCart(account_id, book_id) {
-    fetch(`/add_cart?account_id=${account_id}&book_id=${book_id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Network response was not ok.');
-        })
-        .then(data => {
-            console.log(data);
-            alert('Book added to cart successfully!');
-        })
-        .catch(error => {
-            console.error('There was a problem with your fetch operation:', error);
-            alert('Error adding book to cart. Please try again later.');
-        });
-}
-
-// แสดงรายการสินค้าในตะกร้า
-function showCart(readerId) {
-    fetch(`/show_cart?reader_id=${readerId}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error('Network response was not ok.');
-        })
-        .then(data => {
-            // แสดงรายการสินค้าที่มีอยู่ในตะกร้า
-            console.log(data);
-            // ทำการแสดงผลในหน้าเว็บ
-            // เช่น การสร้าง HTML เพื่อแสดงรายการสินค้าในตะกร้า
-        })
-        .catch(error => {
-            console.error('There was a problem with your fetch operation:', error);
-            alert('Error fetching cart data. Please try again later.');
-        });
 }

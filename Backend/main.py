@@ -51,7 +51,7 @@ controller.add_book(book3)
 controller.add_book(book4)
 controller.add_book(book5)
 
-controller.top_up(1,150,3)
+controller.top_up(1,150,2)
 
 print(T.payment_history_list)
 print(controller.buy_book(1,[1]))

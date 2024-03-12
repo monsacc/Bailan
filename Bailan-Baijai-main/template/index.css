@@ -22,22 +22,6 @@
     color: black;
 }
 
-.complain-content{
-    text-align: center;
-    font-family: Arial, sans-serif;
-}
-
-.complain-block{
-    width: 600px;
-    margin: auto;
-    padding: 20px;
-    border: 2px solid #6d6d6d;
-    border-radius: 8px;
-}
-
-
-
-
 
 .bookInfoContainer {
     display: flex;
@@ -80,5 +64,4 @@
 a {
     color: black;
     text-decoration: none;
-  }  
-  
+  }

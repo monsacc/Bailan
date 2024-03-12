@@ -1,4 +1,5 @@
 const account_id = localStorage.getItem('account_id');
+const Type = localStorage.getItem('account_type');
 
 function changeHeading(text) {
   const heading = document.querySelector('h1.text-center.py-4');
@@ -28,7 +29,6 @@ async function search_by_name(event) {
     `http://127.0.0.1:8000/search_book_by_name?name=${input}`
     
   );
-
   console.log(response.data);
 
   const heading = document.querySelector('h1.text-center.py-4');
@@ -181,9 +181,14 @@ async function add_rating() {
   console.log("id", Id)
   console.log("stars", stars)
 
-  const response = await axios.post(
-    `http://127.0.0.1:8000/rating?book_id=${Id}&rating=${stars}`
-  );
+  try {
+    const response = await axios.post(
+      `http://127.0.0.1:8000/rating?book_id=${Id}&rating=${stars}`
+    );
+    alert("Success");
+  } catch (error) {
+      alert(error.response.data.detail);
+  }
 }
 
 async function get_promotion() {
@@ -214,7 +219,6 @@ async function get_promotion_page() {
   window.location.href = 'index.html?promotion=true';
 }
 
-
 async function add_comment(event) {
   if (event) {
     event.preventDefault();
@@ -224,12 +228,16 @@ async function add_comment(event) {
   const bookId = urlParams.get('id');
   const input = document.getElementById("comment").value;
 
-  const response = await axios.post(
-    `http://127.0.0.1:8000/comment?Reader_id=${account_id}&Book_id=${bookId}&comment=${input}`
-  );
-
-  console.log(response.data);
-  show_comment();
+  try {
+    const response = await axios.post(
+      `http://127.0.0.1:8000/comment?Reader_id=${account_id}&Book_id=${bookId}&comment=${input}`
+    );
+    alert("Success");
+    console.log(response.data);
+    show_comment();
+  } catch (error) {
+      alert(error.response.data.detail);
+  }
 }
 
 async function show_comment() {
@@ -282,12 +290,18 @@ async function add_complain(event) {
   }
 
   const input = document.getElementById("complain").value;
-
   const response = await axios.post(
     `http://127.0.0.1:8000/submit_complaint?user_id=${account_id}&message=${input}`
   );
 
-  console.log(response.data);
+  try {
+    const response = await axios.post(
+      `http://127.0.0.1:8000/submit_complaint?user_id=${account_id}&message=${input}`
+    );
+    alert("Success");
+  } catch (error) {
+      alert(error.response.data.detail);
+  }
 }
 
 async function show_complain() {
@@ -297,9 +311,7 @@ async function show_complain() {
 
   const complainList = response.data["Complain"];
   displayComplain(complainList);
-  
 }
-
 
 function displayComplain(complainList) {
   const complainContainer = document.getElementById('complainList');
@@ -316,20 +328,31 @@ function displayComplain(complainList) {
   });
 }
 
-async function writer_book_collection() {
-  const queryParams = new URLSearchParams(window.location.search);
+async function writer_book_collection(queryParams) {
   const writer = queryParams.get('writer');
-
   const heading = document.querySelector('h1.text-center.py-4');
-  heading.textContent = `${writer} Collection`;
+  // console.log(writer);
+  if (writer) {
+      const response = await axios.get(
+          `http://127.0.0.1:8000/show_book_collection_of_writer?writer_name=${writer}`
+      );
 
-  const content = document.getElementById("content");
-  const response = await axios.get(
-      `http://127.0.0.1:8000/show_book_collection_of_writer?writer_name=${writer}`
-  );
+      const book_list = response.data["Book's list"];
+      displayBookList(book_list);
+  } else {
+      const accountName = localStorage.getItem('username');
+      console.log(accountName);
+      if (accountName) {
+          const response = await axios.get(
+              `http://127.0.0.1:8000/show_book_collection_of_writer?writer_name=${accountName}`
+          );
 
-  const book_list = response.data["Book's list"];
-  displayBookList(book_list);
+          const book_list = response.data["Book's list"];
+          displayBookList(book_list);
+      } else {
+          console.log("No writer specified in the URL and no account ID found.");
+      }
+  }
 }
 
 async function reader_book_collection() {
@@ -346,3 +369,11 @@ async function reader_book_collection() {
   displayBookList(book_list);
 }
 
+function check_collection(accountType) {
+  console.log(Type);
+  if (accountType === Type) {
+    window.location.href = 'reader_book_collection.html';
+  } else {
+    window.location.href = 'writer_book_collection.html';
+  }
+}

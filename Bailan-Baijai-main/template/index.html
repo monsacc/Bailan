@@ -24,8 +24,8 @@
                 </a>
 
                 <a href="topup.html" class="btn btn-outline-light me-1">Top Up</a>
-                <a href="index.html" class="btn btn-outline-light me-1">Home Page</a>
-                <a href="reader_book_collection.html" class="btn btn-outline-light me-1">Book's Collection</a>
+                <!-- <a href="index.html" class="btn btn-outline-light me-1">Home Page</a> -->
+                <a onclick="check_collection('reader')" class="btn btn-outline-light me-1">Book's Collection</a>
                 <a href="history.html" class="btn btn-outline-light me-1">History</a>
 
                 <h1 class="h1-center">Bailan</h1>
@@ -63,40 +63,50 @@
                 <button onclick="add_complain(event)" class="btn btn-outline-dark me-2" type="button">Submit</button>
                 <button onclick="show_complain()" class="btn btn-outline-dark me-2" type="button">view complain</button>
             </form>
-            
         </div>
     </div>
-    <div class=" complain-content" id="complainList">
-        
-            
-    </div>
-    
-        
+
+    <div class="mt-4" id="complainList"></div>
+
     <script>
         window.onload = function() {
-            get_all_book()
-
-            //const account_id = localStorage.getItem('account_id');
-            //console.log(account_id)
-
+            const accountType = localStorage.getItem('account_type');
+            console.log(localStorage.getItem('username'));
+            get_all_book();
+        
+            // Check if the user is a writer
+            if (accountType === 'writer') {
+                // Change the text of the "Top Up" button to "Transfer"
+                const topUpButton = document.querySelector('a[href="topup.html"]');
+                if (topUpButton) {
+                    topUpButton.innerText = 'Transfer';
+                    // Change the href attribute to "transfer.html" or any appropriate URL
+                    topUpButton.setAttribute('href', 'transfer.html');
+                }
+            }
+        
+            const account_id = localStorage.getItem('account_id');
+            console.log(account_id)
+        
             const queryParams = new URLSearchParams(window.location.search);
             const searchInput = queryParams.get('search');
             if (searchInput) {
                 search_by_name_2(searchInput);
             }
-    
+        
             const queryParamsBookInfo = new URLSearchParams(window.location.search);
             const bookId = queryParamsBookInfo.get('id');
             if (bookId) {
                 show_comment();
             }
-    
+        
             const queryParamsPromotion = new URLSearchParams(window.location.search);
             const isPromotion = queryParamsPromotion.get('promotion');
             if (isPromotion === 'true') {
                 get_promotion();
             }
         };
+        
     </script>
 
     <script src="js/bootstrap.min.js"></script>

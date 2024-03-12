@@ -107,6 +107,14 @@ class Controller:
                 return book
         return None
     
+    def search_coin(self, account_id):
+        account = self.search_reader_by_id(account_id)
+        if account is None:
+            account = self.search_writer_by_id(account_id)
+            if account is None:
+                return "Not found account"
+        return account.coin
+    
     def search_book_by_bookname(self, bookname):
         new_book_list = []
         for book in self.__book_list:
@@ -272,7 +280,7 @@ class Controller:
             if reader.cart is not None and reader.cart.book_cart_list:
                 cart_info = []
                 for book in reader.cart.book_cart_list:
-                    cart_info.append({"name": book.name, "price": book.price_coin})
+                    cart_info.append({"name": book.name, "price": book.price_coin, "id": book.id})
                 return cart_info
             else:
                 return "Reader's cart is empty"
@@ -286,7 +294,7 @@ class Controller:
                 selected_books = [book for book in reader.cart.book_cart_list if book.id in book_ids]
                 if selected_books:
                     total_coin = sum(book.price_coin for book in selected_books)
-                    return {"message": "Books selected for checkout", "total_coin": total_coin}
+                    return {"message": "Books selected for checkout", "total_coin": total_coin, "list book": book_ids}
                 else:
                     return {"error": "Invalid book selection"}
             else:
@@ -491,14 +499,14 @@ class Controller:
             return "Have no complain."
         return complaints_info
 
-    def login_reader(self, account_name, password):
+    def login(self, account_name, password):
         for account in self.__reader_list:
             if account.account_name == account_name and account.password == password:
-                return account
+                return account.id_account, "reader"
         for account in self.writer_list:
             if account.account_name == account_name and account.password == password:
-                return account
-        return None
+                return account.id_account, "writer"
+        return None, None
 
     def register_reader(self, account_name, password):
         for reader in self.__reader_list:
@@ -511,4 +519,15 @@ class Controller:
         self.__reader_list.append(reader)
         
         return "Reader registered successfully."
+    
+    def register_writer(self, account_name, password):
+        for writer in self.__writer_list:
+            if writer.account_name == account_name:
+                return "Username already exists. Please choose another one."
+
+        self.__num_of_account += 1
+        writer = Writer(account_name, password)
+        writer.id_account = self.__num_of_account
+        self.__writer_list.append(writer)
         
+        return "Writer registered successfully."

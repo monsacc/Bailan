@@ -1,5 +1,4 @@
 
-
 async function top_up(event) {
     event.preventDefault();
     const money = document.getElementById('money').value;

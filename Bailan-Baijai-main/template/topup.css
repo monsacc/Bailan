@@ -1,14 +1,15 @@
 .payment-container{
-    background-color: #767676;
+    /* background-color: #ff774a;
     width: 280px;
-    color: #fff;
+    color: #fff; */
     position: relative;
     left: 600px;
     border-radius: 10px;
 }
-p{
-    
 
+.topic{
+    text-align: center;
+    
 }
 
 .payment-container input{
@@ -21,5 +22,6 @@ p{
 }
 
 .chanels-content{
-    margin-left: 600px;
+    text-align: center;
+    margin-top: 15px;
 }

@@ -311,7 +311,14 @@ async function show_complain() {
 
   const complainList = response.data["Complain"];
   displayComplain(complainList);
-}
+
+  var commentsContainer = document.querySelector('#complainList');
+    if (!commentsContainer.classList.contains('hidden')) {
+      commentsContainer.classList.add('hidden');
+    } else {
+      commentsContainer.classList.remove('hidden');
+    }
+  } 
 
 function displayComplain(complainList) {
   const complainContainer = document.getElementById('complainList');
@@ -319,12 +326,14 @@ function displayComplain(complainList) {
 
   complainList.forEach(complain => {
     const complainDiv = document.createElement('div');
+    complainDiv.classList.add('commentDiv');
 
     const accountPara = document.createElement('p');
     accountPara.textContent = `${complain.account} : ${complain.message} on ${complain.datetime}`;
     complainDiv.appendChild(accountPara);
-
     complainContainer.appendChild(complainDiv);
+
+
   });
 }
 

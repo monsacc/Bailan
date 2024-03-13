@@ -47,6 +47,17 @@
     width: 320px;
     /* กำหนดขนาดสูงสุดของรูปภาพ */
 }
+#complainList{
+    max-width: 600px;
+    /* Set the maximum width of the comment list */
+    margin: 0 auto;
+    /* Center the comment list horizontally */
+    text-align: center;
+    
+}
+.hidden{
+    display: none;
+}
 
 #commentList {
     max-width: 600px;

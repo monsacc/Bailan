@@ -27,5 +27,5 @@ class Review:
         self.__rating = '%.2f' %(sum(self.__rating_list) / len(self.__rating_list))
     
     def add_comment(self, reader, comment):
-        date_time = datetime.datetime.now()
+        date_time = datetime.datetime.now().strftime("%c")
         self.__comment_list.append((reader, comment, date_time))

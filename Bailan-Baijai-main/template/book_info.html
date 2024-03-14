@@ -23,7 +23,7 @@
                 <use xlink:href="#bootstrap"></use>
             </svg> -->
                 </a>
-
+                <div class="btn btn-outline-light me-2 custom-btn" id="result"></div>
                 <a href="index.html" class="btn btn-outline-light me-1">Home Page</a>
 
                 <h1 class="h1-center">Bailan</h1>
@@ -42,15 +42,6 @@
     </nav>
 
     <h1 class="text-center py-4">Book's information</h1>
-
-    <!-- <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-1">
-            <button class="btn btn-danger d-block mx-auto promotion-btn" onclick="get_promotion_page()">promotion</button>
-          </div>
-        </div>
-    </div> -->
-
 
     <div class="bookInfoContainer">
         <img id="bookCover" src="" alt="Book Cover">
@@ -87,10 +78,32 @@
             const bookId = queryParams.get('id');
             get_book_info(bookId);
             show_comment();
+
+            const accountType = localStorage.getItem('account_type');
+            if (accountType === 'writer') {
+                const cartButton = document.querySelector('a[href="cart.html"]');
+                if (cartButton) {
+                    cartButton.style.display = 'none';
+                }
+                const addToCartButton = document.getElementById('addToCartButton');
+                if (addToCartButton) {
+                    addToCartButton.style.display = 'none';
+                }
+                const starElement = document.querySelector('.star');
+                if (starElement) {
+                    starElement.style.marginTop = '-250px';
+                    starElement.style.marginLeft = '800px';
+                }
+                const commentElement = document.querySelector('.comment');
+                if (commentElement) {
+                    commentElement.style.marginLeft = '800px';
+                }
+            }
         };
     </script>
 
     <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="book_info.js"></script>

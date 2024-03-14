@@ -57,6 +57,7 @@ if (loginForm) {
             });
             const account_id = response.data.account_id;
             localStorage.setItem('account_id', account_id);
+            localStorage.setItem('username', username )
             // Redirect to dashboard or handle success
             window.location.href = 'index.html';
         } catch (error) {

@@ -51,7 +51,7 @@ controller.add_book(book3)
 controller.add_book(book4)
 controller.add_book(book5)
 
-controller.top_up(1,150,2)
+controller.top_up(1,180000,2)
 
 print(T.payment_history_list)
 print(controller.buy_book(1,[1]))
@@ -66,19 +66,21 @@ for info in T.coin_transaction_history_list:
 for book in T.book_collection_list:
     print(book.id)
 
-@app.post("/top_up", tags=['top up'])
-async def top_up(account_id : int, money : coinInput, chanel_id:int):
-    return {controller.top_up(account_id, money.coin,chanel_id)}
+print(controller.buy_book(1,[4,5]))
 
-@app.post("/buy_book", tags=["buy"])
-async def buy_book(account_id: int, list_book : BookIdList):
-    return {
-        "Buy" : controller.buy_book(account_id,list_book.book_id)
-    }
+# @app.post("/top_up", tags=['top up'])
+# async def top_up(account_id : int, money : coinInput, chanel_id:int):
+#     return {controller.top_up(account_id, money.coin,chanel_id)}
 
-@app.get("/chanels",tags=["top up"])
-async def show_payment_method()->dict:
-    return {"chanels":controller.show_payment_method()}
+# @app.post("/buy_book", tags=["buy"])
+# async def buy_book(account_id: int, list_book : BookIdList):
+#     return {
+#         "Buy" : controller.buy_book(account_id,list_book.book_id)
+#     }
+
+# @app.get("/chanels",tags=["top up"])
+# async def show_payment_method()->dict:
+#     return {"chanels":controller.show_payment_method()}
 
 
 """"

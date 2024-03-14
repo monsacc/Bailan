@@ -22,10 +22,10 @@ async function upload(event) {
             "content": content
         });
         console.log("Response:", response);
+        
         alert(response.data.status);
     } catch (error) {
         console.error("Error:", error);
-        alert(error.response ? error.response.data.detail : 'An error occurred.');
     }
 }
 
@@ -35,7 +35,11 @@ async function uploadFile() {
 
     // Check if a file is selected
     if (!file) {
-        alert('Please select a file before uploading.');
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Please select a file before uploading.",
+          });
         return;
     }
 
@@ -50,7 +54,12 @@ async function uploadFile() {
 
         const data = await response.json();
         document.getElementById('response').innerText = `File uploaded successfully. Filename: ${data.filename}`;
-        alert('Success');
+        Swal.fire({
+            icon: "success",
+            title: "Success",
+            showConfirmButton: false,
+            timer: 1500
+          });
     } catch (error) {
         console.error('Error uploading file:', error);
         document.getElementById('response').innerText = 'Error uploading file.';

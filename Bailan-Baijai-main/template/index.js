@@ -16,6 +16,14 @@ async function get_all_book() {
 
 function page_search_by_name() {
   const input = document.getElementById("search_by_name").value;
+  if (input === '') {
+    Swal.fire({
+      icon: "error",
+      title: "Nothing fill.",
+      text: "Please fill before search.",
+    });
+    return;
+  }
   window.location.href = `index.html?search=${input}`;
 }
 
@@ -24,6 +32,15 @@ async function search_by_name(event) {
 
   const input = document.getElementById("search_by_name").value;
   const content = document.getElementById("content");
+
+  if (input === '') {
+    Swal.fire({
+      icon: "error",
+      title: "Nothing fill.",
+      text: "Please fill before search.",
+    });
+    return;
+  }
 
   const response = await axios.get(
     `http://127.0.0.1:8000/search_book_by_name?name=${input}`
@@ -41,6 +58,16 @@ async function search_by_name(event) {
 
 async function search_by_name_2(input) {
   const content = document.getElementById("content");
+  
+  if (input == '') {
+    Swal.fire({
+      icon: "error",
+      title: "Nothing fill.",
+      text: "Please fill before search.",
+    });
+    return;
+  }
+
   const response = await axios.get(
       `http://127.0.0.1:8000/search_book_by_name?name=${input}`
   );
@@ -161,6 +188,16 @@ function toggleStar(star) {
 }
 
 function submitFormAndAddStar() {
+  const accountType = localStorage.getItem('account_type');
+  if (accountType === "writer") {
+    Swal.fire({
+      icon: "error",
+      title: "Can't add rating.",
+      text: "Writers are not allowed to add rating.",
+    });
+    return;
+  }
+
   add_rating();
   submitForm();
 }
@@ -185,9 +222,18 @@ async function add_rating() {
     const response = await axios.post(
       `http://127.0.0.1:8000/rating?book_id=${Id}&rating=${stars}`
     );
-    alert("Success");
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      showConfirmButton: false,
+      timer: 1500
+    });
   } catch (error) {
-      alert(error.response.data.detail);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
   }
 }
 
@@ -224,6 +270,15 @@ async function add_comment(event) {
     event.preventDefault();
   }
 
+  const accountType = localStorage.getItem('account_type');
+  if (accountType === "writer") {
+    Swal.fire({
+      icon: "error",
+      title: "Comments add!",
+    });
+    return;
+  }
+
   const urlParams = new URLSearchParams(window.location.search);
   const bookId = urlParams.get('id');
   const input = document.getElementById("comment").value;
@@ -232,11 +287,20 @@ async function add_comment(event) {
     const response = await axios.post(
       `http://127.0.0.1:8000/comment?Reader_id=${account_id}&Book_id=${bookId}&comment=${input}`
     );
-    alert("Success");
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      showConfirmButton: false,
+      timer: 1500
+    });
     console.log(response.data);
     show_comment();
   } catch (error) {
-      alert(error.response.data.detail);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
   }
 }
 
@@ -290,17 +354,22 @@ async function add_complain(event) {
   }
 
   const input = document.getElementById("complain").value;
-  const response = await axios.post(
-    `http://127.0.0.1:8000/submit_complaint?user_id=${account_id}&message=${input}`
-  );
-
   try {
     const response = await axios.post(
       `http://127.0.0.1:8000/submit_complaint?user_id=${account_id}&message=${input}`
     );
-    alert("Success");
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      showConfirmButton: false,
+      timer: 1500
+    });
   } catch (error) {
-      alert(error.response.data.detail);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
   }
 }
 
@@ -345,7 +414,7 @@ async function writer_book_collection(queryParams) {
       const response = await axios.get(
           `http://127.0.0.1:8000/show_book_collection_of_writer?writer_name=${writer}`
       );
-
+      heading.innerText = `${writer} Collection`
       const book_list = response.data["Book's list"];
       displayBookList(book_list);
   } else {
@@ -373,7 +442,7 @@ async function reader_book_collection() {
   const response = await axios.get(
       `http://127.0.0.1:8000/show_book_collection_of_reader?Reader_id=${account_id}`
   );
-
+  heading.innerText = 'My Collection'
   const book_list = response.data["Book's list"];
   displayBookList(book_list);
 }
@@ -385,4 +454,37 @@ function check_collection(accountType) {
   } else {
     window.location.href = 'writer_book_collection.html';
   }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  // Check if there is a saved account ID
+  if (account_id) {
+      // Display the account ID on the page
+      // document.getElementById('result').innerHTML = "Account ID: " + account_id;
+
+      // Periodically update coin information using the retrieved account ID
+      setInterval(function () {
+          loadCoinInfo(account_id);
+      }, 350); // Update every 5 seconds (adjust as needed)
+  } else {
+      // Handle the case where there is no saved account ID
+      console.log("No account ID found in localStorage.");
+  }
+});
+
+function loadCoinInfo(account_id) {
+  // Make an AJAX request to fetch coin information using the account ID
+  var xhr = new XMLHttpRequest();
+
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+          var result = JSON.parse(xhr.responseText);
+          document.getElementById('result').innerHTML = "Coin: " + result.coin;
+      }
+  };
+
+  // Adjust the URL to match your FastAPI route
+  xhr.open("GET", "http://127.0.0.1:8000/search_coin?id=" + account_id, true);
+  xhr.send();
 }

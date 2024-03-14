@@ -1,7 +1,7 @@
 class BookStatus:
     def __init__(self, start_date, end_date, status):
-        self.__start_date = start_date
-        self.__end_date = end_date
+        self.__start_date = start_date.strftime("%c")
+        self.__end_date = end_date.strftime("%c")
         self.__status = status
         
     def __str__(self):

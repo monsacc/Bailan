@@ -3,6 +3,7 @@
 }
 
 .h1-center {
+    font-size: 3em;
     color: white;
     text-align: center;
     flex-grow: 1;
@@ -41,6 +42,13 @@
     margin-top: -100px;
     margin-left: 50px;
     margin-right: 50px;
+}
+.card {
+    transition: transform 0.6s ease;
+}
+
+.card:hover {
+    transform: scale(1.1);
 }
 
 #bookCover {
@@ -137,4 +145,10 @@ a {
 
 .comment-datetime {
     margin-top: 5px;
+}
+
+.custom-btn {
+    background-color: yellow;
+    color: #212529; /* Text color (adjust as needed) */
+    border-color: yellow; /* Border color */
 }

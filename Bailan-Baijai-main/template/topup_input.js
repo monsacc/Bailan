@@ -12,11 +12,16 @@ async function top_up(event) {
             "coin": money,
         });
         console.log("Response:", response);
-        alert(response.data.status);
+        
+         alert(response.data.status);
         // Redirect to login page or handle success
     } catch (error) {
         console.error("Error:", error);
-        alert(error.response ? error.response.data.detail : 'An error occurred.');
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Pleas increse/decrese 1 Baht!",
+          });
     }
 }
 document.getElementById('topUpButton').addEventListener('click', top_up);

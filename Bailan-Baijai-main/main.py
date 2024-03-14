@@ -118,7 +118,7 @@ controller.add_rating(5, 4)
 controller.add_rating(6, 5)
 controller.add_rating(6, 3)
 
-controller.add_promotion_list(promotion1)
+controller.promotion = promotion1
 # controller.add_promotion_list(promotion2)
 
 # ------------------------------------------
@@ -245,7 +245,7 @@ async def view_comment(Book_id : int) -> dict:
 # Promotion
 @app.get("/show_promotion", tags=['Promotion'])
 async def show_promotion() -> dict:
-    return {"Promotion": controller.show_promotion()}
+    return {"Promotion": controller.promotion.name_festival}
 
 #Complain
 @app.post("/submit_complaint", tags = ["Complain"])

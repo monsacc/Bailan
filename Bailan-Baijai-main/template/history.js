@@ -39,7 +39,7 @@ function displayPaymentTransac(paymentTransacList) {
     Paymenttrans.innerHTML = "";
 
     if (Array.isArray(paymentTransacList) && paymentTransacList.length > 0) {
-        paymentTransacList.forEach(data => {
+        paymentTransacList.forEach(data => {   
             Paymenttrans.innerHTML += `<p>Transaction: ${data}</p>`;
         });
     } else {

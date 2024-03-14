@@ -19,7 +19,7 @@ class Complain:
 
     @date_time.setter
     def date_time(self, newtime):
-        self.__date_time = newtime
+        self.__date_time = newtime.strftime("%c")
 
     @property
     def complain_list(self):
